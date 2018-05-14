@@ -1,0 +1,2 @@
+type,sku#,itemdescription,price
+DELETE,100,Samsung TV, 600

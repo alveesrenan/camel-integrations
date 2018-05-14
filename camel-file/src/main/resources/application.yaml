@@ -1,0 +1,120 @@
+spring:
+  profiles:
+    active: dev
+
+# Prevent camel to lock process waiting 300 seconds (default) to kill gracefully pending exchange
+camel:
+  springboot:
+    shutdownTimeout: 2
+    health.indicator.enabled: true
+
+management:
+  security:
+    enabled: false
+
+---
+
+spring:
+  profiles: dev
+  dataSource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: 123456
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: camelnotification99@gmail.com
+    password: Qwert#1234
+    properties.mail.smtp.starttls.enable: true
+
+  mailto: camelnotification99@gmail.com
+  mailfrom: camelnotification99@gmail.com
+
+startRoute: timer:hello?period=10
+fromRoute: file:data/input?delete=true&readLock=none&moveFailed=error
+toRoute1: file:data/output
+toRoute2: jdbc:dataSource
+toRoute3: file:data/output?fileName=SuccessFile.txt
+healthRoute: timer:healthRoute?period=10
+
+message: DEV Environment
+
+---
+
+spring:
+  profiles: stage
+  dataSource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: 123456
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: camelnotification99@gmail.com
+    password: Qwert#1234
+    properties.mail.smtp.starttls.enable: true
+
+  mailto: camelnotification99@gmail.com
+  mailfrom: camelnotification99@gmail.com
+
+startRoute: timer:hello?period=10s
+fromRoute: file:data/input?delete=true&readLock=none&moveFailed=error
+toRoute1: file:data/output
+toRoute2: jdbc:dataSource
+toRoute3: file:data/output?fileName=SuccessFile.txt
+healthRoute: timer:healthRoute?period=10
+
+message: STAGE Environment
+
+---
+
+spring:
+  profiles: prod
+  dataSource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: 123456
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: camelnotification99@gmail.com
+    password: Qwert#1234
+    properties.mail.smtp.starttls.enable: true
+
+  mailto: camelnotification99@gmail.com
+  mailfrom: camelnotification99@gmail.com
+
+startRoute: timer:hello?period=10s
+fromRoute: file:data/input?delete=true&readLock=none&moveFailed=error
+toRoute1: file:data/output
+toRoute2: jdbc:dataSource
+toRoute3: file:data/output?fileName=SuccessFile.txt
+healthRoute: timer:healthRoute?period=10
+
+message: PROD Environment
+
+---
+
+spring:
+  profiles: mock
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: camelnotification99@gmail.com
+    password: Qwert#1234
+    properties.mail.smtp.starttls.enable: true
+
+startRoute: direct:input
+fromRoute: file:data/input?delete=true&readLock=none&moveFailed=error
+toRoute1: mock:output
+toRoute2: mock:output1
+toRoute3: mock:output2
+healthRoute: direct:health
+
+message: PROD Environment
+
+---
