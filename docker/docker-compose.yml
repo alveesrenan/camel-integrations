@@ -16,6 +16,8 @@ services:
     image: wurstmeister/kafka
     ports:
           - 9092:9092
+    depends_on:
+          - zookeeper
     environment:
       LOG4J_LOGGER_KAFKA_AUTHORIZER_LOGGER: DEBUG
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
@@ -26,8 +28,6 @@ services:
 
   zookeeper:
     image: zookeeper
-    links:
-          - kafka-broker
     restart: always
     ports:
       - 2181:2181

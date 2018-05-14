@@ -2,6 +2,7 @@ package com.learncamel.routes;
 
 import com.learncamel.domain.Item;
 import com.learncamel.exception.DataException;
+import com.learncamel.processor.BuildSQLProcessor;
 import com.learncamel.processor.MailProcessor;
 import com.learncamel.processor.ValidateDataProcessor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +35,9 @@ public class KafkaRoute extends RouteBuilder {
     @Autowired
     private ValidateDataProcessor validateDataProcessor;
 
+    @Autowired
+    private BuildSQLProcessor buildSQLProcessor;
+
     @Override
     public void configure() throws Exception {
 
@@ -57,6 +61,7 @@ public class KafkaRoute extends RouteBuilder {
                 .unmarshal(itemFormat)
                 .log("Unmarshalled message is ${body}")
                 .process(validateDataProcessor)
+                .process(buildSQLProcessor)
                 .to("{{toRoute}}");
 
     }

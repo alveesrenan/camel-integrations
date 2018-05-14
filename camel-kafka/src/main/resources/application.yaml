@@ -33,7 +33,7 @@ spring:
 
 startRoute: timer:hello?period=10
 fromRoute: kafka:inputItemTopic?brokers=localhost:9092&groupId=itemDev&autoOffsetReset=earliest&consumersCount=1
-toRoute:  log:?level=INFO&showBody=true
+toRoute:  jdbc:dataSource
 errorRoute: kafka:errorTopic?brokers=localhost:9092
 healthRoute: timer:health?period=10s
 
@@ -60,7 +60,7 @@ spring:
 
 startRoute: timer:hello?period=10s
 fromRoute: kafka:inputItemTopic?brokers=localhost:9092&groupId=itemDev&autoOffsetReset=earliest&consumersCount=1
-toRoute:  log:?level=INFO&showBody=true
+toRoute:  jdbc:dataSource
 errorRoute: kafka:errorTopic?brokers=localhost:9092
 healthRoute: timer:health?period=10s
 
@@ -87,7 +87,7 @@ spring:
 
 startRoute: timer:hello?period=10s
 fromRoute: kafka:inputItemTopic?brokers=localhost:9092&groupId=itemDev&autoOffsetReset=earliest&consumersCount=1
-toRoute:  log:?level=INFO&showBody=true
+toRoute:  jdbc:dataSource
 errorRoute: kafka:errorTopic?brokers=localhost:9092
 healthRoute: timer:health?period=10s
 
