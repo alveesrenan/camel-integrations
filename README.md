@@ -5,8 +5,8 @@ speed up the setup of the necessary environment. So make sure *docker-compose* a
 
 # What's covered?
 
-### [Simple Camel Route - File -> DB -> MAIL](https://github.com/victoraldir/learncamel-spring-boot/tree/master/file-integration)
-### [Kafka Camel Route - Kafka -> DB -> MAIL](https://github.com/victoraldir/learncamel-spring-boot/tree/master/kafka-integration)
+### [Simple Camel Route - File -> DB -> MAIL](https://github.com/victoraldir/camel-integrations/tree/master/camel-file)
+### [Kafka Camel Route - Kafka -> DB -> MAIL](https://github.com/victoraldir/camel-integrations/tree/master/camel-kafka)
 ### ActiveMQ Camel Route - ActiveMQ -> DB -> MAIL
 ### REST Camel Route - REST -> RESTLET-> DB -> MAIL
 ### SOAP Camel Route - SOAP -> Spring-WS-> DB -> MAIL
